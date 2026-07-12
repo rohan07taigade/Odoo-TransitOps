@@ -1,10 +1,16 @@
 import importlib
 import logging
 import pkgutil
+import sys
+from pathlib import Path
 
 from sqlmodel import SQLModel
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
+
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from app.core.config import settings
 from app.core.security import get_password_hash
