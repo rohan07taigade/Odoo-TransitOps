@@ -5,7 +5,10 @@ from jose import jwt, JWTError
 from passlib.context import CryptContext
 from app.core.config import settings
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(
+    schemes=["pbkdf2_sha256"],
+    deprecated="auto",
+)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Check if a plain password matches the hashed one in the database."""
@@ -36,6 +39,6 @@ def create_access_token(subject: Union[str, Any], expires_delta: timedelta | Non
 
 def decode_access_token(token: str) -> dict:
     try:
-        return jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
+        return jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
     except JWTError:
         raise ValueError("Invalid or expired token")
