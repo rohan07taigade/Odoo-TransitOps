@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 from fastapi import HTTPException
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
@@ -61,7 +61,7 @@ async def update_vehicle(vehicle_id: int, payload: VehicleUpdate, session: Async
     update_data = payload.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(vehicle, field, value)
-    vehicle.updated_at = datetime.now(timezone.utc)
+    vehicle.updated_at = datetime.utcnow()
     session.add(vehicle)
     await session.commit()
     await session.refresh(vehicle)
@@ -73,7 +73,7 @@ async def retire_vehicle(vehicle_id: int, session: AsyncSession) -> Vehicle:
     if vehicle.status == VehicleStatus.on_trip:
         raise HTTPException(status_code=400, detail="Cannot retire a vehicle that is currently on a trip")
     vehicle.status = VehicleStatus.retired
-    vehicle.updated_at = datetime.now(timezone.utc)
+    vehicle.updated_at = datetime.utcnow()
     session.add(vehicle)
     await session.commit()
     await session.refresh(vehicle)
@@ -85,7 +85,7 @@ async def set_vehicle_status(vehicle_id: int, new_status: VehicleStatus, session
     if vehicle.status == VehicleStatus.retired and new_status != VehicleStatus.retired:
         raise HTTPException(status_code=400, detail="Retired vehicles cannot be reactivated")
     vehicle.status = new_status
-    vehicle.updated_at = datetime.now(timezone.utc)
+    vehicle.updated_at = datetime.utcnow()
     session.add(vehicle)
     await session.commit()
     await session.refresh(vehicle)
@@ -96,9 +96,8 @@ async def update_odometer(vehicle_id: int, final_odometer: float, session: Async
     if final_odometer < vehicle.odometer_reading:
         raise HTTPException(status_code=400, detail="Final odometer reading cannot be less than current reading")
     vehicle.odometer_reading = final_odometer
-    vehicle.updated_at = datetime.now(timezone.utc)
+    vehicle.updated_at = datetime.utcnow()
     session.add(vehicle)
     await session.commit()
     await session.refresh(vehicle)
     return vehicle
-
