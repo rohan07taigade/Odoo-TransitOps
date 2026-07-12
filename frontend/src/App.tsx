@@ -1,7 +1,14 @@
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Layout from "./components/Layout";
+import Analytics from "./pages/Analytics";
 import Dashboard from "./pages/Dashboard";
+import Drivers from "./pages/Drivers";
+import Fleet from "./pages/Fleet";
+import FuelExpenses from "./pages/FuelExpenses";
 import Login from "./pages/Login";
+import Maintenance from "./pages/Maintenance";
+import Settings from "./pages/Settings";
+import Trips from "./pages/Trips";
 import { useAuthStore } from "./stores/authStore";
 
 function RequireAuth() {
@@ -18,13 +25,13 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/fleet" element={<PlaceholderPage title="Fleet" />} />
-          <Route path="/drivers" element={<PlaceholderPage title="Drivers" />} />
-          <Route path="/trips" element={<PlaceholderPage title="Trips" />} />
-          <Route path="/maintenance" element={<PlaceholderPage title="Maintenance" />} />
-          <Route path="/fuel-expenses" element={<PlaceholderPage title="Fuel & Expenses" />} />
-          <Route path="/analytics" element={<PlaceholderPage title="Analytics" />} />
-          <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
+          <Route path="/fleet" element={<Fleet />} />
+          <Route path="/drivers" element={<Drivers />} />
+          <Route path="/trips" element={<Trips />} />
+          <Route path="/maintenance" element={<Maintenance />} />
+          <Route path="/fuel-expenses" element={<FuelExpenses />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
       </Route>
     </Routes>
