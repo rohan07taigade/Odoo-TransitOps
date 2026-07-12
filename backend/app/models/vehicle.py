@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 from enum import Enum
 from sqlmodel import SQLModel, Field
 
@@ -27,5 +27,5 @@ class Vehicle(SQLModel, table=True):
     status: VehicleStatus = Field(default=VehicleStatus.available, index=True)
     region: str = Field(max_length=100, index=True, default=None)
 
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
