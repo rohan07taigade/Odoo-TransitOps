@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app.db.database import get_session
-from app.core.deps import get_current_user, require_role
+from app.core.dependencies import get_current_user, require_role
 from app.models.vehicle import VehicleStatus
 from app.schemas.vehicle import VehicleCreate, VehicleUpdate, VehicleRead
 from app.services import vehicle_service
