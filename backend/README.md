@@ -168,33 +168,3 @@ Key relationships: `vehicles 1—N trips`, `drivers 1—N trips`, `vehicles 1—
 | Frontend Developer 1 (Framer) | Routing, auth context, protected layout/sidebar, Login screen, Dashboard UI |
 | Frontend Developer 2 (Builder) | Data tables/forms — Vehicle Registry, Driver profiles, Trip creation form with validation |
 
----
-
-## Current Status
-
-- ✅ Frontend UI complete for all core pages (mock data): Login, Dashboard, Fleet, Drivers, Trips, Maintenance, Fuel & Expenses, Analytics, Settings, User Management
-- ✅ Role-based sidebar visibility (User Management restricted to Admin)
-- ⏳ Backend API integration pending — pages currently run on hardcoded mock data matching the backend schema field names, for a low-friction swap later
-- ⏳ Real authentication (JWT) and database-backed RBAC enforcement pending
-
----
-
-## Mandatory Deliverables
-
-- [x] Responsive web interface
-- [ ] Authentication with RBAC (backend integration pending)
-- [ ] CRUD for Vehicles and Drivers (backend integration pending)
-- [ ] Trip Management with validations (client-side done; server-side pending)
-- [ ] Automatic status transitions (backend pending)
-- [ ] Maintenance workflow (backend pending)
-- [ ] Fuel & Expense tracking (backend pending)
-- [x] Dashboard with KPIs (UI)
-- [x] Charts and visual analytics (UI)
-
-## Bonus Features (if time allows)
-
-- [ ] PDF export
-- [ ] Email/console reminders for expiring licenses
-- [ ] Vehicle document management
-- [x] Search, filters, and sorting (UI)
-- [ ] Dark mode
